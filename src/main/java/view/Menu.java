@@ -16,12 +16,12 @@ public abstract class Menu extends JFrame implements ActionListener {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
-    protected void showContent() {
+    public void showContent() {
         this.pack();
         this.setVisible(true);
     }
 
-    protected void close() {
+    public void close() {
         dispose();
     }
 }

@@ -30,6 +30,12 @@ public class AddMenu extends Menu {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        if (e.getSource().equals(addButton)) {
 
+        } else if (e.getSource().equals(backButton)) {
+
+        } else {
+            throw new IllegalStateException();
+        }
     }
 }

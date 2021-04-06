@@ -22,6 +22,14 @@ public class FilterMenu extends Menu {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        if (e.getSource().equals(filterButton)) {
 
+        } else if (e.getSource().equals(unFilterButton)) {
+
+        } else if (e.getSource().equals(backButton)) {
+
+        } else {
+            throw new IllegalStateException();
+        }
     }
 }

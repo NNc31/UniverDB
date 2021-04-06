@@ -30,6 +30,12 @@ public class EditMenu extends Menu {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        if (e.getSource().equals(editButton)) {
 
+        } else if (e.getSource().equals(backButton)) {
+
+        } else {
+            throw new IllegalStateException();
+        }
     }
 }
