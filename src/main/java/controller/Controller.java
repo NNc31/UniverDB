@@ -24,8 +24,8 @@ public class Controller {
         AddMenu addMenu = new AddMenu(this);
         addMenu.showContent();
     }
-    public void launchEdit(){
-        EditMenu editMenu = new EditMenu(this);
+    public void launchEdit(String id){
+        EditMenu editMenu = new EditMenu(this, id);
         editMenu.showContent();
     }
     public void launchDelete(){
@@ -59,6 +59,10 @@ public class Controller {
         APIWord apiWord = new APIWord();
         apiWord.writeToFile(filter());
     }
+    public Worker getWorker(String id){
+        return workerDAO.getWorker(id);
+    }
+
 
 
 }
