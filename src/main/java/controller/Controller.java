@@ -20,17 +20,21 @@ public class Controller {
         MainMenu mainMenu = new MainMenu(this);
         mainMenu.showContent();
     }
+  
     public void launchAdd(){
         AddMenu addMenu = new AddMenu(this);
         addMenu.showContent();
     }
-    public void launchEdit(String id){
+  
+public void launchEdit(String id){
         EditMenu editMenu = new EditMenu(this, id);
         editMenu.showContent();
     }
+  
     public void launchDelete(){
 
     }
+  
     public void launchFilter(){
         FilterMenu filterMenu = new FilterMenu(this);
         filterMenu.showContent();
@@ -39,8 +43,10 @@ public class Controller {
     public void addWorker(Worker worker){
         workerDAO.create(worker);
     }
+
     public void editWorker(String id, Worker worker){ //добавил параметр Worker
         workerDAO.update(id, worker);
+
     }
     public void deleteWorker(String id){
         workerDAO.delete(id);

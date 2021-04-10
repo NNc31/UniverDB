@@ -28,6 +28,12 @@ public class MainMenu extends Menu {
         gbc.insets = new Insets(10, 0, 0, 0);
         contentPane.add(titleLabel, gbc);
 
+        addButton.addActionListener(this);
+        editButton.addActionListener(this);
+        deleteButton.addActionListener(this);
+        filterButton.addActionListener(this);
+        saveButton.addActionListener(this);
+
         JScrollPane verticalScroll = new JScrollPane(workers);
         JScrollPane horizontalScroll = new JScrollPane(workers);
         verticalScroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
@@ -73,19 +79,21 @@ public class MainMenu extends Menu {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(addButton)) {
-            try {
-                int id = Integer.parseInt(idField.getText());
-            } catch (NumberFormatException ex) {
-                
-            }
+            controller.launchAdd();
+            close();
         } else if (e.getSource().equals(editButton)) {
-
+            //controller.launchEdit(idField.getText());
+            close();
         } else if (e.getSource().equals(deleteButton)) {
-
+            //controller.launchDelete(idField.getText());
+            close();
         } else if (e.getSource().equals(filterButton)) {
-
+            controller.launchFilter();
+            close();
         } else if (e.getSource().equals(saveButton)) {
-
+            controller.saveWorkers();
+            close();
+            controller.launchMain();
         } else {
             throw new IllegalStateException();
         }

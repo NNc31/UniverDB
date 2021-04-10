@@ -13,6 +13,7 @@ public abstract class Menu extends JFrame implements ActionListener {
         this.controller = controller;
         setTitle("Універ БД");
         setContentPane(contentPane);
+        setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
