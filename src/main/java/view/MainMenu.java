@@ -79,19 +79,21 @@ public class MainMenu extends Menu {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(addButton)) {
-            try {
-                int id = Integer.parseInt(idField.getText());
-            } catch (NumberFormatException ex) {
-                
-            }
+            controller.launchAdd();
+            close();
         } else if (e.getSource().equals(editButton)) {
-
+            //controller.launchEdit(idField.getText());
+            close();
         } else if (e.getSource().equals(deleteButton)) {
-
+            //controller.launchDelete(idField.getText());
+            close();
         } else if (e.getSource().equals(filterButton)) {
-
+            controller.launchFilter();
+            close();
         } else if (e.getSource().equals(saveButton)) {
-
+            controller.saveWorkers();
+            close();
+            controller.launchMain();
         } else {
             throw new IllegalStateException();
         }

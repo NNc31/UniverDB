@@ -1,13 +1,11 @@
 import controller.Controller;
-import view.AddMenu;
-import view.MainMenu;
-import view.Menu;
+import view.*;
 
 public class Main {
 
     public static void main(String[] args) {
         Controller controller = new Controller();
-        Menu menu = new AddMenu(controller);
+        Menu menu = new MainMenu(controller);
         menu.showContent();
     }
 }

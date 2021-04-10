@@ -1,6 +1,8 @@
 package view;
 
 import controller.Controller;
+import model.CheckData;
+import model.Worker;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,8 +24,8 @@ public class AddMenu extends Menu {
     private JTextField birthField = new JTextField(6);
     private JTextField employmentField = new JTextField(6);
     private JTextField positionField = new JTextField(8);
-    private JTextField degreeField = new JTextField(6);
-    private JTextField rankField = new JTextField(6);
+    private JComboBox<String> degreeBox;
+    private JComboBox<String> rankBox;
 
     public AddMenu(Controller controller) {
         super(controller);
@@ -99,11 +101,14 @@ public class AddMenu extends Menu {
         gbc.anchor = GridBagConstraints.EAST;
         contentPane.add(degreeLabel, gbc);
 
+
+        String[] degrees = {"Кандидат", "Доктор наук", "Відсутній"};
+        degreeBox = new JComboBox<>(degrees);
         gbc.gridx = 1;
         gbc.gridy = 5;
         gbc.insets = new Insets(10, 5, 5, 15);
         gbc.anchor = GridBagConstraints.WEST;
-        contentPane.add(degreeField, gbc);
+        contentPane.add(degreeBox, gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 6;
@@ -111,11 +116,13 @@ public class AddMenu extends Menu {
         gbc.anchor = GridBagConstraints.EAST;
         contentPane.add(rankLabel, gbc);
 
+        String[] ranks = {"Доцент", "Професор", "Відсутнє"};
+        rankBox = new JComboBox<>(ranks);
         gbc.gridx = 1;
         gbc.gridy = 6;
         gbc.insets = new Insets(10, 5, 5, 15);
         gbc.anchor = GridBagConstraints.WEST;
-        contentPane.add(rankField, gbc);
+        contentPane.add(rankBox, gbc);
 
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new FlowLayout());
@@ -123,16 +130,25 @@ public class AddMenu extends Menu {
         buttonPanel.add(backButton);
         gbc.gridx = 1;
         gbc.gridy = 7;
-        gbc.insets = new Insets(5, 0, 15, 15);
+        gbc.insets = new Insets(15, 0, 10, 10);
         contentPane.add(buttonPanel, gbc);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(addButton)) {
-
+            Worker worker = CheckData.checkAndCreateWorker(surnameField.getText(), departmentField.getText(),
+                    birthField.getText(), employmentField.getText(), positionField.getText(),
+                    (String) degreeBox.getSelectedItem(), (String) rankBox.getSelectedItem());
+            if (worker == null) {
+                JOptionPane.showMessageDialog(new JPanel(), "Некоректні дані співробітника",
+                        "Помилка", JOptionPane.WARNING_MESSAGE);
+            } else controller.addWorker(worker);
+            controller.launchMain();
+            close();
         } else if (e.getSource().equals(backButton)) {
-
+            controller.launchMain();
+            close();
         } else {
             throw new IllegalStateException();
         }

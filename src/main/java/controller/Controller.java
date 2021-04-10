@@ -25,8 +25,8 @@ public class Controller {
         addMenu.showContent();
     }
     public void launchEdit(){
-        EditMenu editMenu = new EditMenu(this);
-        editMenu.showContent();
+        //EditMenu editMenu = new EditMenu(this);
+        //editMenu.showContent();
     }
     public void launchDelete(){
 

@@ -1,11 +1,43 @@
 package model;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.time.temporal.ChronoUnit;
+
 public class CheckData {
-    public static boolean checkWorker(Worker worker) {
-        return true;
+    public static Worker checkAndCreateWorker(String surname, String department, String birthStr,
+                                     String employmentStr, String position, String degree, String rank) {
+
+        LocalDate birth, employment;
+        try {
+            birth = LocalDate.parse(birthStr, DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+            employment = LocalDate.parse(employmentStr, DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+        } catch (DateTimeParseException e) {
+            return null;
+        }
+
+        int age = (int) ChronoUnit.YEARS.between(birth, LocalDate.now());
+
+        if (degree.matches("Відсутній|Кандидат|Доктор наук") &&
+                rank.matches("Відстунє|Доцент|Професор") &&
+                age >= 18 && !employment.isAfter(LocalDate.now())) {
+            return new Worker(surname, age, department, birth, employment, position, degree, rank);
+        }
+        else return null;
     }
 
-    public boolean checkFilters(int minAge, int maxAge, boolean rank) {
-        return true;
+    public static boolean checkFilters(String minAge, String maxAge, String rank) {
+        int min, max;
+        try {
+            if (minAge.isBlank()) min = 0;
+            else min = Integer.parseInt(minAge);
+            if (maxAge.isBlank()) max = Integer.MAX_VALUE;
+            else max = Integer.parseInt(maxAge);
+        } catch (NumberFormatException e) {
+            return false;
+        }
+
+        return rank.matches("Відсутнє|Доцент|Професор|Неважливо") && min <= max && min >= 0;
     }
 }
