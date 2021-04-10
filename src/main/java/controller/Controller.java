@@ -39,10 +39,10 @@ public class Controller {
     public void addWorker(Worker worker){
         workerDAO.create(worker);
     }
-    public void editWorker(int id, Worker worker){ //добавил параметр Worker
+    public void editWorker(String id, Worker worker){ //добавил параметр Worker
         workerDAO.update(id, worker);
     }
-    public void deleteWorker(int id){
+    public void deleteWorker(String id){
         workerDAO.delete(id);
     }
 
