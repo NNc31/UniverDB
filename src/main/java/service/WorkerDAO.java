@@ -14,7 +14,7 @@ public class WorkerDAO {
     private File source;
 
     private FileReader connectToRead() {
-        source = new File("");
+        source = new File("DataBase.txt");
         FileReader fileReader = null;
         try {
             fileReader = new FileReader(source);
@@ -24,7 +24,7 @@ public class WorkerDAO {
         return fileReader;
     }
     private FileWriter connectToWrite(boolean append){
-        source = new File("");
+        source = new File("DataBase.txt");
         FileWriter fileWriter = null;
         try{
             fileWriter = new FileWriter(source, append);
@@ -51,9 +51,18 @@ public class WorkerDAO {
     }
 
     public void create(Worker worker) {
+        FileReader fileReader = connectToRead();
+        Scanner scanner = new Scanner(fileReader);
+        int count = 0;
+        while(scanner.hasNextLine()){
+            scanner.nextLine();
+            count++;
+        }
+        disconnect(fileReader);
+        worker.setId(String.valueOf(count));
         FileWriter fileWriter = connectToWrite(true);
         StringBuilder stringBuilder = new StringBuilder();
-        //stringBuilder.append(worker.getId());
+        stringBuilder.append(worker.getId());
         stringBuilder.append(" ");
         stringBuilder.append(worker.getSurname());
         stringBuilder.append(" ");
@@ -72,6 +81,7 @@ public class WorkerDAO {
         stringBuilder.append(worker.getRank());
         try {
             fileWriter.write(stringBuilder.toString());
+            fileWriter.append(System.getProperty("line.separator"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -98,22 +108,74 @@ public class WorkerDAO {
         return list;
     }
 
-   /* public void update(String id, Worker worker) {
+    public void update(String id, Worker worker) {
+        worker.setId(id);
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(worker.getId());
+        stringBuilder.append(" ");
+        stringBuilder.append(worker.getSurname());
+        stringBuilder.append(" ");
+        stringBuilder.append(worker.getAge());
+        stringBuilder.append(" ");
+        stringBuilder.append(worker.getDepartment());
+        stringBuilder.append(" ");
+        stringBuilder.append(worker.getBirthDate());
+        stringBuilder.append(" ");
+        stringBuilder.append(worker.getEmploymentDate());
+        stringBuilder.append(" ");
+        stringBuilder.append(worker.getPosition());
+        stringBuilder.append(" ");
+        stringBuilder.append(worker.getDegree());
+        stringBuilder.append(" ");
+        stringBuilder.append(worker.getRank());
+        String newWorkerInfo = stringBuilder.toString();
 
         FileReader fileReader = connectToRead();
         Scanner scanner = new Scanner(fileReader);
-        LinkedList<String> list = new LinkedList<>();
+        LinkedList<String> workerList = new LinkedList<>();
         while (scanner.hasNextLine()){
             String line = scanner.nextLine();
-            if(line.startsWith(id+" "))
-            list.add();
+            if(line.startsWith(id + " ")){
+                line = newWorkerInfo;
+            }
+            workerList.add(line);
         }
         disconnect(fileReader);
         FileWriter fileWriter = connectToWrite(false);
+        try {
+            for (String s: workerList) {
+                 fileWriter.write(s);
+                fileWriter.append(System.getProperty("line.separator"));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        disconnect(fileWriter);
+    }
 
-    }*/
-
-    public void delete(int id) {
-
+    public void delete(String id) {
+        FileReader fileReader = connectToRead();
+        Scanner scanner = new Scanner(fileReader);
+        LinkedList<String> workerList = new LinkedList<>();
+        int count = 0;
+        while (scanner.hasNextLine()){
+            String line = scanner.nextLine();
+            if(! line.startsWith(id + " ")){
+                line = count + line.substring(line.indexOf(" "));
+                workerList.add(line);
+                count++;
+            }
+        }
+        disconnect(fileReader);
+        FileWriter fileWriter = connectToWrite(false);
+        try {
+            for (String s: workerList) {
+                fileWriter.write(s);
+                fileWriter.append(System.getProperty("line.separator"));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        disconnect(fileWriter);
     }
 }

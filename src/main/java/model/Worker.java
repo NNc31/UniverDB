@@ -13,6 +13,18 @@ public class Worker {
     private String degree;
     private String rank;
 
+    public Worker(String surname, int age, String department, LocalDate birthDate,
+                  LocalDate employmentDate, String position, String degree, String rank) {
+        this.surname = surname;
+        this.age = age;
+        this.department = department;
+        this.birthDate = birthDate;
+        this.employmentDate = employmentDate;
+        this.position = position;
+        this.degree = degree;
+        this.rank = rank;
+    }
+
     public Worker(String id, String surname, int age, String department, LocalDate birthDate,
                   LocalDate employmentDate, String position, String degree, String rank) {
         this.id = id;
