@@ -13,6 +13,9 @@ public class Worker {
     private String degree;
     private String rank;
 
+    public Worker() {
+    }
+
     public Worker(String surname, int age, String department, LocalDate birthDate,
                   LocalDate employmentDate, String position, String degree, String rank) {
         this.surname = surname;
