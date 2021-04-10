@@ -27,7 +27,7 @@ public class CheckData {
         else return null;
     }
 
-    public static boolean checkFilters(String minAge, String maxAge, String rank) {
+    public static boolean checkFilters(String minAge, String maxAge, String degree) {
         int min, max;
         try {
             if (minAge.isBlank()) min = 0;
@@ -38,6 +38,6 @@ public class CheckData {
             return false;
         }
 
-        return rank.matches("Відсутнє|Доцент|Професор|Неважливо") && min <= max && min >= 0;
+        return degree.matches("Відсутній|Кандидат|Доктор наук|Неважливо") && min <= max && min >= 0;
     }
 }

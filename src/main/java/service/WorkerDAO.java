@@ -63,8 +63,8 @@ public class WorkerDAO {
         FileWriter fileWriter = connectToWrite(true);
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(worker.getId()).append(" ").append(worker.getSurname()).append(" ").append(worker.getAge());
-        stringBuilder.append(" ").append(worker.getDepartment()).append(" ").append(worker.getBirthDate());
-        stringBuilder.append(" ").append(worker.getEmploymentDate()).append(" ").append(worker.getPosition());
+        stringBuilder.append(" ").append(worker.getDepartment()).append(" ").append(worker.getBirthDate().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")));
+        stringBuilder.append(" ").append(worker.getEmploymentDate().format(DateTimeFormatter.ofPattern("dd.MM.yyyy"))).append(" ").append(worker.getPosition());
         stringBuilder.append(" ").append(worker.getDegree()).append(" ").append(worker.getRank());
         try {
             fileWriter.write(stringBuilder.toString());
@@ -75,16 +75,16 @@ public class WorkerDAO {
         disconnect(fileWriter);
     }
 
-    public List<Worker> read(int minAge, int maxAge, String rank) throws Exception {
+    public List<Worker> read(int minAge, int maxAge, String degree) throws Exception {
         List<Worker> list = new LinkedList<>();
         FileReader fileReader = connectToRead();
         Scanner scanner = new Scanner(fileReader);
         while (scanner.hasNextLine()){
             String line = scanner.nextLine();
             String []info = line.split(" ");
-            int workerAge = Integer.parseInt(info[1]);
-            String workerRank = info[7];
-            if(workerAge >= minAge && workerAge <= maxAge && (rank == null || workerRank.equals(rank))){
+            int workerAge = Integer.parseInt(info[2]);
+            String workerDegree = info[7];
+            if(workerAge >= minAge && workerAge <= maxAge && (workerDegree.equals(degree) || degree == null)){
                 LocalDate birthDate = LocalDate.parse(info[4], DateTimeFormatter.ofPattern("dd.MM.yyyy"));
                 LocalDate employmentDate = LocalDate.parse(info[5], DateTimeFormatter.ofPattern("dd.MM.yyyy"));
                 list.add(new Worker(info[0], info[1], Integer.parseInt(info[2]), info[3],
