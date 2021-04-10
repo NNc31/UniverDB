@@ -20,17 +20,21 @@ public class Controller {
         MainMenu mainMenu = new MainMenu(this);
         mainMenu.showContent();
     }
+  
     public void launchAdd(){
         AddMenu addMenu = new AddMenu(this);
         addMenu.showContent();
     }
-    public void launchEdit(){
-        //EditMenu editMenu = new EditMenu(this);
-        //editMenu.showContent();
+  
+public void launchEdit(String id){
+        EditMenu editMenu = new EditMenu(this, id);
+        editMenu.showContent();
     }
+  
     public void launchDelete(){
 
     }
+  
     public void launchFilter(){
         FilterMenu filterMenu = new FilterMenu(this);
         filterMenu.showContent();
@@ -61,6 +65,10 @@ public class Controller {
         APIWord apiWord = new APIWord();
         apiWord.writeToFile(filter());
     }
+    public Worker getWorker(String id){
+        return workerDAO.getWorker(id);
+    }
+
 
 
 }
