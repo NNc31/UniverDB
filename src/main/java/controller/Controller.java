@@ -40,7 +40,7 @@ public class Controller {
         workerDAO.create(worker);
     }
     public void editWorker(int id, Worker worker){ //добавил параметр Worker
-        workerDAO.update(id, worker);
+        //workerDAO.update(id, worker);
     }
     public void deleteWorker(int id){
         workerDAO.delete(id);

@@ -28,6 +28,12 @@ public class MainMenu extends Menu {
         gbc.insets = new Insets(10, 0, 0, 0);
         contentPane.add(titleLabel, gbc);
 
+        addButton.addActionListener(this);
+        editButton.addActionListener(this);
+        deleteButton.addActionListener(this);
+        filterButton.addActionListener(this);
+        saveButton.addActionListener(this);
+
         JScrollPane verticalScroll = new JScrollPane(workers);
         JScrollPane horizontalScroll = new JScrollPane(workers);
         verticalScroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
