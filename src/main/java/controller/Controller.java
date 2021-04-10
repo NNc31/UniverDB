@@ -8,6 +8,7 @@ import view.EditMenu;
 import view.FilterMenu;
 import view.MainMenu;
 
+import javax.swing.*;
 import java.util.List;
 
 public class Controller {
@@ -41,32 +42,74 @@ public void launchEdit(String id){
     }
 
     public void addWorker(Worker worker){
-        workerDAO.create(worker);
+        try {
+            workerDAO.create(worker);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(new JPanel(), "Помилка при створенні", "Помилка",
+                    JOptionPane.ERROR_MESSAGE);
+        }
     }
 
-    public void editWorker(String id, Worker worker){ //добавил параметр Worker
-        workerDAO.update(id, worker);
-
+    public void editWorker(String id, Worker worker) {
+        try {
+            workerDAO.update(id, worker);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(new JPanel(), "Помилка при зміні", "Помилка",
+                    JOptionPane.ERROR_MESSAGE);
+        }
     }
-    public void deleteWorker(String id){
-        workerDAO.delete(id);
+    public void deleteWorker(String id) {
+        try {
+            workerDAO.delete(id);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(new JPanel(), "Помилка при видаленні", "Помилка",
+                    JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     public List<Worker> filter(int minAge, int maxAge, String rank){
         this.minAge = minAge;
         this.maxAge = maxAge;
         this.rank = rank;
-        return workerDAO.read(minAge, maxAge, rank);
+        try {
+            return workerDAO.read(minAge, maxAge, rank);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(new JPanel(), "Помилка при зчитуванні", "Помилка",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+        System.exit(0);
+        return null;
     }
-    public List<Worker> filter(){
-        return workerDAO.read(minAge, maxAge, rank);
+
+    public List<Worker> filter() {
+        try {
+            return workerDAO.read(minAge, maxAge, rank);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(new JPanel(), "Помилка при зчитуванні", "Помилка",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+        try {
+            return workerDAO.read(minAge, maxAge, rank);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(new JPanel(), "Помилка при зчитуванні", "Помилка",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+        System.exit(0);
+        return null;
     }
     public void saveWorkers(){
         APIWord apiWord = new APIWord();
         apiWord.writeToFile(filter());
     }
-    public Worker getWorker(String id){
-        return workerDAO.getWorker(id);
+    public Worker getWorker(String id) {
+        try {
+            return workerDAO.getWorker(id);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(new JPanel(), "Помилка при зчитуванні", "Помилка",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+        System.exit(0);
+        return null;
     }
 
 
