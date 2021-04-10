@@ -6,35 +6,39 @@ import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 
 import javax.swing.*;
 import java.io.*;
+import java.time.format.DateTimeFormatter;
 import java.util.LinkedList;
 import java.util.List;
 
 public class APIWord {
-    public void createFile(){
-
+    public void createFile(){ // xз шо тут писать
     }
-    private void saveFile(){}
-    public void writeToFile(List<Worker> workerList){
-        XWPFDocument document = new XWPFDocument();
-        List<XWPFParagraph> paragraphList = new LinkedList<>();
-        for (Worker w : workerList) {
-            StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.append("Прізвище: ").append(w.getSurname()).append("\tдата народження: ").append(w.getBirthDate());
-            stringBuilder.append("\tназва кафедри: ").append(w.getDepartment()).append("\tпосада: ").append(w.getPosition());
-            stringBuilder.append("\tнауковий ступінь: ").append(w.getDegree()).append("\tвчене звання: ").append(w.getRank());
-            stringBuilder.append("\tдата працевлаштування: ").append(w.getEmploymentDate());
-            String info = stringBuilder.toString();
-            document.createParagraph().createRun().setText(info);
-        }
+    private void saveFile(XWPFDocument document) throws Exception {
         JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setSelectedFile(new File("EmployeesInfo.docx"));
         if(fileChooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
             try (FileOutputStream fos = new FileOutputStream(fileChooser.getSelectedFile())) {
                 document.write(fos);
             } catch (IOException e) {
-                e.printStackTrace();
+                throw new Exception("Data could not be written to file");
             }
         }
-
+    }
+    public void writeToFile(List<Worker> workerList) throws Exception {
+        XWPFDocument document = new XWPFDocument();
+        for (Worker w : workerList) {
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.append("Прізвище: ").append(w.getSurname()).append("    Дата народження: ")
+                    .append(w.getBirthDate().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")))
+                    .append("    Назва кафедри: ").append(w.getDepartment()).append("    Посада: ")
+                    .append(w.getPosition()).append("    Науковий ступінь: ").append(w.getDegree())
+                    .append("    Вчене звання: ").append(w.getRank()).append("    Дата працевлаштування: ")
+                    .append(w.getEmploymentDate().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")));
+            String info = stringBuilder.toString();
+            document.createParagraph().createRun().setText(info);
+            document.createParagraph().createRun();
+        }
+        saveFile(document);
 
     }
 }

@@ -13,9 +13,9 @@ import java.util.List;
 
 public class Controller {
     private WorkerDAO workerDAO = new WorkerDAO();
-    private int minAge;
-    private int maxAge;
-    private String rank;
+    private int minAge = 0;
+    private int maxAge = 100;
+    private String degree = null;
 
     public void launchMain(){
         MainMenu mainMenu = new MainMenu(this);
@@ -27,7 +27,7 @@ public class Controller {
         addMenu.showContent();
     }
   
-public void launchEdit(String id){
+    public void launchEdit(String id){
         EditMenu editMenu = new EditMenu(this, id);
         editMenu.showContent();
     }
@@ -67,12 +67,12 @@ public void launchEdit(String id){
         }
     }
 
-    public List<Worker> filter(int minAge, int maxAge, String rank){
+    public List<Worker> filter(int minAge, int maxAge, String degree){
         this.minAge = minAge;
         this.maxAge = maxAge;
-        this.rank = rank;
+        this.degree = degree;
         try {
-            return workerDAO.read(minAge, maxAge, rank);
+            return workerDAO.read(minAge, maxAge, degree);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(new JPanel(), "Помилка при зчитуванні", "Помилка",
                     JOptionPane.ERROR_MESSAGE);
@@ -83,13 +83,7 @@ public void launchEdit(String id){
 
     public List<Worker> filter() {
         try {
-            return workerDAO.read(minAge, maxAge, rank);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(new JPanel(), "Помилка при зчитуванні", "Помилка",
-                    JOptionPane.ERROR_MESSAGE);
-        }
-        try {
-            return workerDAO.read(minAge, maxAge, rank);
+            return workerDAO.read(minAge, maxAge, degree);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(new JPanel(), "Помилка при зчитуванні", "Помилка",
                     JOptionPane.ERROR_MESSAGE);
@@ -99,7 +93,12 @@ public void launchEdit(String id){
     }
     public void saveWorkers(){
         APIWord apiWord = new APIWord();
-        apiWord.writeToFile(filter());
+        try {
+            apiWord.writeToFile(filter());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(new JPanel(), "Помилка під час збереження в файл", "Помилка",
+                    JOptionPane.ERROR_MESSAGE);
+        }
     }
     public Worker getWorker(String id) {
         try {

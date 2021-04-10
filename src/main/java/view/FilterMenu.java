@@ -11,8 +11,8 @@ public class FilterMenu extends Menu {
 
     private JButton filterButton = new JButton("Фільтрувати");
     private JButton backButton = new JButton("Назад");
-    private JComboBox rankBox;
-    private JLabel rankLabel = new JLabel("Вчене звання");
+    private JComboBox degreeBox;
+    private JLabel degreeLabel = new JLabel("Науковий ступінь");
     private JLabel minAgeLabel = new JLabel("Мінімальний вік");
     private JLabel maxAgeLabel = new JLabel("Максимальний вік");
     private JTextField minAgeField = new JTextField(3);
@@ -51,15 +51,15 @@ public class FilterMenu extends Menu {
         gbc.gridy = 2;
         gbc.anchor = GridBagConstraints.EAST;
         gbc.insets = new Insets(5, 5, 5, 5);
-        contentPane.add(rankLabel, gbc);
+        contentPane.add(degreeLabel, gbc);
 
-        String[] ranks = {"Неважливо", "Відсутнє", "Доцент", "Професор"};
-        rankBox = new JComboBox<>(ranks);
+        String[] degrees = {"Неважливо", "Відсутній", "Кандидат", "Доктор наук"};
+        degreeBox = new JComboBox<>(degrees);
         gbc.gridx = 1;
         gbc.gridy = 2;
         gbc.anchor = GridBagConstraints.WEST;
         gbc.insets = new Insets(5, 5, 5, 5);
-        contentPane.add(rankBox, gbc);
+        contentPane.add(degreeBox, gbc);
 
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new FlowLayout());
@@ -78,17 +78,17 @@ public class FilterMenu extends Menu {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(filterButton)) {
-            String rank = (String) rankBox.getSelectedItem();
+            String degree = (String) degreeBox.getSelectedItem();
             if (CheckData.checkFilters(minAgeField.getText(), maxAgeField.getText(),
-                    (String) rankBox.getSelectedItem())) {
+                    (String) degreeBox.getSelectedItem())) {
 
                 int minAge, maxAge;
                 if (minAgeField.getText().isBlank()) minAge = 0;
                 else minAge = Integer.parseInt(minAgeField.getText());
                 if (maxAgeField.getText().isBlank()) maxAge = Integer.MAX_VALUE;
                 else maxAge = Integer.parseInt(maxAgeField.getText());
-                if (rank.equals("Неважливо")) rank = null;
-                controller.filter(minAge, maxAge, rank);
+                if (degree.equals("Неважливо")) degree = null;
+                controller.filter(minAge, maxAge, degree);
             } else JOptionPane.showMessageDialog(new JPanel(), "Некоректні дані фільтрування",
                     "Помилка", JOptionPane.WARNING_MESSAGE);
 
