@@ -99,8 +99,10 @@ public class WorkerDAO {
         worker.setId(id);
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(worker.getId()).append(" ").append(worker.getSurname()).append(" ").append(worker.getAge());
-        stringBuilder.append(" ").append(worker.getDepartment()).append(" ").append(worker.getBirthDate());
-        stringBuilder.append(" ").append(worker.getEmploymentDate()).append(" ").append(worker.getPosition());
+        stringBuilder.append(" ").append(worker.getDepartment()).append(" ")
+                .append(worker.getBirthDate().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")));
+        stringBuilder.append(" ").append(worker.getEmploymentDate()
+                .format(DateTimeFormatter.ofPattern("dd.MM.yyyy"))).append(" ").append(worker.getPosition());
         stringBuilder.append(" ").append(worker.getDegree()).append(" ").append(worker.getRank());
         String newWorkerInfo = stringBuilder.toString();
 

@@ -32,8 +32,9 @@ public class Controller {
         editMenu.showContent();
     }
   
-    public void launchDelete(){
-
+    public void launchDelete(String id) {
+        deleteWorker(id);
+        launchMain();
     }
   
     public void launchFilter(){
@@ -61,6 +62,8 @@ public class Controller {
     public void deleteWorker(String id) {
         try {
             workerDAO.delete(id);
+            JOptionPane.showMessageDialog(new JPanel(), "Видалення успішне", "Видалення",
+                    JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(new JPanel(), "Помилка при видаленні", "Помилка",
                     JOptionPane.ERROR_MESSAGE);

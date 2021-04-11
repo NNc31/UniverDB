@@ -7,6 +7,7 @@ import model.Worker;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.time.format.DateTimeFormatter;
 
 public class EditMenu extends Menu {
 
@@ -110,7 +111,7 @@ public class EditMenu extends Menu {
         contentPane.add(degreeLabel, gbc);
 
 
-        String[] degrees = {"Кандидат", "Доктор наук", "Відсутній"};
+        String[] degrees = {"Кандидат", "Доктор_наук", "Відсутній"};
         degreeBox = new JComboBox<>(degrees);
         gbc.gridx = 1;
         gbc.gridy = 5;
@@ -140,6 +141,15 @@ public class EditMenu extends Menu {
         gbc.gridy = 7;
         gbc.insets = new Insets(15, 0, 10, 10);
         contentPane.add(buttonPanel, gbc);
+
+        Worker worker = controller.getWorker(id);
+        surnameField.setText(worker.getSurname());
+        departmentField.setText(worker.getDepartment());
+        birthField.setText(worker.getBirthDate().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")));
+        employmentField.setText(worker.getEmploymentDate().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")));
+        positionField.setText(worker.getPosition());
+        degreeBox.setSelectedItem(worker.getDegree());
+        rankBox.setSelectedItem(worker.getRank());
     }
 
     @Override
