@@ -18,9 +18,9 @@ public class CheckData {
         }
 
         int age = (int) ChronoUnit.YEARS.between(birth, LocalDate.now());
-
-        if (degree.matches("Відсутній|Кандидат|Доктор наук") &&
-                rank.matches("Відстунє|Доцент|Професор") &&
+        System.out.println("111");
+        if (degree.matches("Відсутній|Кандидат|Доктор_наук") &&
+                rank.matches("Відсутнє|Доцент|Професор") &&
                 age >= 18 && !employment.isAfter(LocalDate.now())) {
             return new Worker(surname, age, department, birth, employment, position, degree, rank);
         }
@@ -38,6 +38,6 @@ public class CheckData {
             return false;
         }
 
-        return degree.matches("Відсутній|Кандидат|Доктор наук|Неважливо") && min <= max && min >= 0;
+        return degree.matches("Відсутній|Кандидат|Доктор_наук|Неважливо") && min <= max && min >= 0;
     }
 }

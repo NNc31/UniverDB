@@ -112,4 +112,16 @@ public class Worker {
     public void setRank(String rank) {
         this.rank = rank;
     }
+
+    @Override
+    public String toString() {
+        return id +
+                " " + surname +
+                "\t" + department +
+                "\t" + birthDate +
+                "\t" + employmentDate +
+                "\t" + position +
+                "\t" + degree +
+                "\t" + rank;
+    }
 }
