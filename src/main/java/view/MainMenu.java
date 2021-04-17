@@ -44,8 +44,6 @@ public class MainMenu extends Menu {
         contentPane.add(horizontalScroll);
         workers.setEditable(false);
         List<Worker> workerList = controller.filter();
-        //String workerStr = "ID\tПрізвище\tКафедра\tНародження\t" +
-        //        "Працевлаштування\tПосада\tНауовий ступінь\tВчене звання  \n\n";
         String workerStr = "";
         for (Worker worker : workerList) {
             workerStr += worker.toString() + "\n";

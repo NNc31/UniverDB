@@ -75,7 +75,7 @@ public class WorkerDAO {
         disconnect(fileWriter);
     }
 
-    public List<Worker> read(int minAge, int maxAge, String degree) throws Exception {
+    public List<Worker> read(int minAge, int maxAge, String rank) throws Exception {
         List<Worker> list = new LinkedList<>();
         FileReader fileReader = connectToRead();
         Scanner scanner = new Scanner(fileReader);
@@ -83,8 +83,8 @@ public class WorkerDAO {
             String line = scanner.nextLine();
             String []info = line.split(" ");
             int workerAge = Integer.parseInt(info[2]);
-            String workerDegree = info[7];
-            if(workerAge >= minAge && workerAge <= maxAge && (workerDegree.equals(degree) || degree == null)){
+            String workerRank = info[8];
+            if(workerAge >= minAge && workerAge <= maxAge && (workerRank.equals(rank) || rank == null)){
                 LocalDate birthDate = LocalDate.parse(info[4], DateTimeFormatter.ofPattern("dd.MM.yyyy"));
                 LocalDate employmentDate = LocalDate.parse(info[5], DateTimeFormatter.ofPattern("dd.MM.yyyy"));
                 list.add(new Worker(info[0], info[1], Integer.parseInt(info[2]), info[3],
