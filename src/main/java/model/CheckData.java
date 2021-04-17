@@ -18,16 +18,16 @@ public class CheckData {
         }
 
         int age = (int) ChronoUnit.YEARS.between(birth, LocalDate.now());
-        System.out.println("111");
         if (degree.matches("Відсутній|Кандидат|Доктор_наук") &&
                 rank.matches("Відсутнє|Доцент|Професор") &&
-                age >= 18 && !employment.isAfter(LocalDate.now())) {
+                age >= 18 && !employment.isAfter(LocalDate.now()) && !department.isEmpty() &&
+                !position.isEmpty() && !surname.isEmpty()) {
             return new Worker(surname, age, department, birth, employment, position, degree, rank);
         }
         else return null;
     }
 
-    public static boolean checkFilters(String minAge, String maxAge, String degree) {
+    public static boolean checkFilters(String minAge, String maxAge, String rank) {
         int min, max;
         try {
             if (minAge.isBlank()) min = 0;
@@ -38,6 +38,6 @@ public class CheckData {
             return false;
         }
 
-        return degree.matches("Відсутній|Кандидат|Доктор_наук|Неважливо") && min <= max && min >= 0;
+        return rank.matches("Відсутнє|Доцент|Професор|Неважливо") && min <= max && min >= 0;
     }
 }

@@ -102,7 +102,7 @@ public class AddMenu extends Menu {
         contentPane.add(degreeLabel, gbc);
 
 
-        String[] degrees = {"Кандидат", "Доктор наук", "Відсутній"};
+        String[] degrees = {"Кандидат", "Доктор_наук", "Відсутній"};
         degreeBox = new JComboBox<>(degrees);
         gbc.gridx = 1;
         gbc.gridy = 5;

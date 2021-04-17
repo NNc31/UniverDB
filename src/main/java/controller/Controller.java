@@ -15,7 +15,7 @@ public class Controller {
     private WorkerDAO workerDAO = new WorkerDAO();
     private int minAge = 0;
     private int maxAge = 100;
-    private String degree = null;
+    private String rank = null;
 
     public void launchMain(){
         MainMenu mainMenu = new MainMenu(this);
@@ -70,12 +70,12 @@ public class Controller {
         }
     }
 
-    public List<Worker> filter(int minAge, int maxAge, String degree){
+    public List<Worker> filter(int minAge, int maxAge, String rank){
         this.minAge = minAge;
         this.maxAge = maxAge;
-        this.degree = degree;
+        this.rank = rank;
         try {
-            return workerDAO.read(minAge, maxAge, degree);
+            return workerDAO.read(minAge, maxAge, rank);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(new JPanel(), "Помилка при зчитуванні", "Помилка",
                     JOptionPane.ERROR_MESSAGE);
@@ -86,7 +86,7 @@ public class Controller {
 
     public List<Worker> filter() {
         try {
-            return workerDAO.read(minAge, maxAge, degree);
+            return workerDAO.read(minAge, maxAge, rank);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(new JPanel(), "Помилка при зчитуванні", "Помилка",
                     JOptionPane.ERROR_MESSAGE);

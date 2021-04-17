@@ -1,6 +1,7 @@
 package model;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Worker {
     private String id;
@@ -118,8 +119,8 @@ public class Worker {
         return id +
                 " " + surname +
                 "\t" + department +
-                "\t" + birthDate +
-                "\t" + employmentDate +
+                "\t" + birthDate.format(DateTimeFormatter.ofPattern("dd.MM.yyyy")) +
+                "\t" + employmentDate.format(DateTimeFormatter.ofPattern("dd.MM.yyyy")) +
                 "\t" + position +
                 "\t" + degree +
                 "\t" + rank;

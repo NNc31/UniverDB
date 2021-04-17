@@ -143,6 +143,7 @@ public class EditMenu extends Menu {
         contentPane.add(buttonPanel, gbc);
 
         Worker worker = controller.getWorker(id);
+        if (worker == null) close();
         surnameField.setText(worker.getSurname());
         departmentField.setText(worker.getDepartment());
         birthField.setText(worker.getBirthDate().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")));
