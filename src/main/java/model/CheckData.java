@@ -8,7 +8,6 @@ import java.time.temporal.ChronoUnit;
 public class CheckData {
     public static Worker checkAndCreateWorker(String surname, String department, String birthStr,
                                      String employmentStr, String position, String degree, String rank) {
-
         LocalDate birth, employment;
         try {
             birth = LocalDate.parse(birthStr, DateTimeFormatter.ofPattern("dd.MM.yyyy"));
@@ -37,7 +36,6 @@ public class CheckData {
         } catch (NumberFormatException e) {
             return false;
         }
-
         return rank.matches("Відсутнє|Доцент|Професор|Неважливо") && min <= max && min >= 0;
     }
 }

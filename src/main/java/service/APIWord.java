@@ -11,8 +11,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class APIWord {
-    public void createFile(){ // xз шо тут писать
-    }
+
     private void saveFile(XWPFDocument document) throws Exception {
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setSelectedFile(new File("EmployeesInfo.docx"));
