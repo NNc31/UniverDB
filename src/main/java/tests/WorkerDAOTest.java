@@ -38,13 +38,13 @@ public class WorkerDAOTest {
     public void createAndDeleteTest(){
         try {
             WorkerDAO workerDAO = new WorkerDAO();
-            List<Worker> beforeOperation = workerDAO.read(0, 0, null);
+            List<Worker> beforeOperation = workerDAO.read(0, 100, null);
             workerDAO.create(new Worker("Егор", 30, "АМФ",
                     LocalDate.parse("20.06.1991", DateTimeFormatter.ofPattern("dd.MM.yyyy")),
                     LocalDate.parse("15.02.2021", DateTimeFormatter.ofPattern("dd.MM.yyyy")),
                     "Секретар", "Доктор_наук", "Професор"));
-            workerDAO.delete("3");
-            List<Worker> afterOperation = workerDAO.read(0, 0, null);
+            workerDAO.delete(String.valueOf(beforeOperation.size()));
+            List<Worker> afterOperation = workerDAO.read(0, 100, null);
             Assert.assertEquals("Дані некоректні", beforeOperation, afterOperation);
         } catch (Exception e) {
             Assert.fail("Помилка операції");
