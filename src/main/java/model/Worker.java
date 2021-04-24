@@ -2,6 +2,7 @@ package model;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 
 public class Worker {
     private String id;
@@ -112,6 +113,19 @@ public class Worker {
 
     public void setRank(String rank) {
         this.rank = rank;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Worker worker = (Worker) o;
+        return age == worker.age && Objects.equals(id, worker.id) && Objects.equals(surname, worker.surname) && Objects.equals(department, worker.department) && Objects.equals(birthDate, worker.birthDate) && Objects.equals(employmentDate, worker.employmentDate) && Objects.equals(position, worker.position) && Objects.equals(degree, worker.degree) && Objects.equals(rank, worker.rank);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, surname, age, department, birthDate, employmentDate, position, degree, rank);
     }
 
     @Override
