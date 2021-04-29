@@ -12,9 +12,10 @@ import java.util.Scanner;
 public class WorkerDAO {
 
     private File source;
+    private String sourceStr = "DataBase.txt";
 
     private FileReader connectToRead() throws Exception {
-        source = new File("DataBase.txt");
+        source = new File(sourceStr);
         FileReader fileReader = null;
         try {
             fileReader = new FileReader(source);
@@ -24,7 +25,7 @@ public class WorkerDAO {
         return fileReader;
     }
     private FileWriter connectToWrite(boolean append) throws Exception {
-        source = new File("DataBase.txt");
+        source = new File(sourceStr);
         FileWriter fileWriter = null;
         try{
             fileWriter = new FileWriter(source, append);
@@ -182,5 +183,9 @@ public class WorkerDAO {
         }
         if(worker != null) return worker;
         else throw new Exception("Not valid ID");
+    }
+
+    public void setSourceStr(String sourceStr) {
+        this.sourceStr = sourceStr;
     }
 }
